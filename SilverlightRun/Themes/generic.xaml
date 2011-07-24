@@ -1,0 +1,77 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"    
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"    
+    xmlns:vsm="clr-namespace:System.Windows;assembly=System.Windows"
+    xmlns:dyngrid="clr-namespace:SilverlightRun.PhoneSpecific.UI.DynamicGrid"
+    xmlns:zoom="clr-namespace:SilverlightRun.PhoneSpecific.UI.Zoom"
+    >
+    <!--UI representation of the SelfSizedGrid.
+    theGrid is being manipulated at runtime by method AddItemToGrid.-->
+    <Style TargetType="dyngrid:SelfSizedGrid">
+        <Setter Property="Background" Value="{StaticResource PhoneBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PhoneAccentBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="dyngrid:SelfSizedGrid">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid x:Name="theGrid">
+                            <TextBlock Text="empty" FontSize="15" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--UI representation of the ZoomContainer. 
+    ContentBorder is being zoomed and panned, while content is placed on ContentContainer.-->
+    <Style TargetType="zoom:ZoomContainer">
+        <Setter Property="InfoText" Value="Pinch and pan to zoom and navigate. Double tap to reset."/>
+        <Setter Property="Background" Value="{StaticResource PhoneBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PhoneAccentBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="zoom:ZoomContainer">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="1" Text="{TemplateBinding InfoText}" FontSize="15" HorizontalAlignment="Center"/>
+                            <Border x:Name="ContentBorder" Background="{TemplateBinding Background}" Grid.Row="0">
+                                <Border.RenderTransform>
+                                    <CompositeTransform ScaleX="1" ScaleY="1" TranslateX="0" TranslateY="0"/>
+                                </Border.RenderTransform>
+                                <ContentPresenter x:Name="ContentContainer" 
+                                                  Content="{TemplateBinding Content}" 
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                                  Margin="{TemplateBinding Padding}"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--UI representation of the ZoomContainerContent. 
+    ContentContainer automaticalls applies a default zoom scale transformation so everything is visible.-->
+    <Style TargetType="zoom:ZoomContainerContent">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="zoom:ZoomContainerContent">
+                    <Canvas>
+                        <StackPanel>
+                            <ContentPresenter x:Name="ContentContainer"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                        </StackPanel>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
