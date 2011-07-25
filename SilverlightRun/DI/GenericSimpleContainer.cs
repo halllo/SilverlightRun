@@ -33,5 +33,11 @@ namespace SilverlightRun.DI
         {
             Container.RegisterSingleton(typeof(S), null, typeof(T));
         }
+
+        public T Prepare<T>(T t)
+        {
+            Container.BuildUp(t);
+            return t;
+        }
     }
 }

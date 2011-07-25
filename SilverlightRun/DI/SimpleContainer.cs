@@ -80,7 +80,7 @@ namespace SilverlightRun.DI
             foreach (var injectable in injectables)
             {
                 var injection = GetAllInstances(injectable.PropertyType);
-                if (injection.Any())
+                if (injection.Any() && injectable.GetValue(instance, null) == null)
                     injectable.SetValue(instance, injection.First(), null);
             }
         }

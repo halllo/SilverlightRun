@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
-using SilverlightRun;
 using SilverlightRun.Tombstoning;
 
 namespace SilverlightRun.ViewModel
@@ -14,10 +13,23 @@ namespace SilverlightRun.ViewModel
     {
         TombstoneSurvivalEngine tombstoning;
 
-        public ColdViewModel(IPhoneService phone)
+        IPhoneService _Phone;
+        public IPhoneService Phone
+        {
+            get
+            {
+                return _Phone;
+            }
+            set
+            {
+                _Phone = value;
+                tombstoning = TombstoneSurvivalEngine.SetupFor<T>(this, _Phone);
+            }
+        }
+
+        public ColdViewModel()
         {
             PropertyChanged += (s, e) => { };
-            tombstoning = TombstoneSurvivalEngine.SetupFor<T>(this, phone);
         }
 
         public void Changed<R>(Expression<Func<R>> property)

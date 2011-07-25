@@ -9,7 +9,6 @@
         public string Word2 { get; set; }
 
         public MainPage()
-            : base(App.ViewModels.Get<SilverlightRun.IPhoneService>())
         {
         }
     }

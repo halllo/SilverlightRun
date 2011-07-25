@@ -13,7 +13,8 @@ namespace SilverlightRunSample
 
         void ShowViewModel_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            tb_VMS.Text = @"namespace SilverlightRunSample.VM
+            tb_VMS.Text = @"<<MainPage.cs>>
+namespace SilverlightRunSample.VM
 {
     public class MainPage : SilverlightRun.ViewModel.ColdViewModel<MainPage>
     {
@@ -24,8 +25,21 @@ namespace SilverlightRunSample
         public string Word2 { get; set; }
 
         public MainPage()
-            : base(App.ViewModels.Get<SilverlightRun.IPhoneService>())
         {
+        }
+    }
+}
+
+<<ViewModelCenter.cs>>
+using SilverlightRun.DI;
+
+namespace SilverlightRunSample.VM
+{
+    public class ViewModelCenter : SilverlightRun.PhoneSpecific.PhoneTypeCenter
+    {
+        protected override void ContainerSetup(GenericSimpleContainer container)
+        {
+            container.DeclareSingleton<VM.MainPage, VM.MainPage>();
         }
     }
 }

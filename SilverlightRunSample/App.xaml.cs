@@ -10,14 +10,14 @@ namespace SilverlightRunSample
     public partial class App : Application
     {
         public static PhoneHelper Helper;
-        public static ViewModelCenter ViewModels;
+        public static ViewModelCenter ViewModelCenter;
 
         public PhoneApplicationFrame RootFrame { get; private set; }
 
         public App()
         {
             Helper = new PhoneHelper(() => RootFrame);
-            ViewModels = new ViewModelCenter();
+            ViewModelCenter = new ViewModelCenter();
 
             UnhandledException += Application_UnhandledException;
 

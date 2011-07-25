@@ -4,11 +4,10 @@ namespace SilverlightRunSample
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        // Constructor
         public MainPage()
         {
             InitializeComponent();
-            DataContext = App.ViewModels.Get<VM.MainPage>();
+            DataContext = App.ViewModelCenter.Get<VM.MainPage>();
             Loaded += new System.Windows.RoutedEventHandler(MainPage_Loaded);
         }
 

@@ -4,6 +4,7 @@ namespace SilverlightRun.PhoneSpecific
 {
     /// <summary>
     /// Provides a basic type locator functionality with default IPhoneService initialized.
+    /// Best staticly initialized in App.xaml.cs to be accessible everywhere.
     /// </summary>
     public abstract class PhoneTypeCenter
     {
@@ -20,7 +21,7 @@ namespace SilverlightRun.PhoneSpecific
 
         public T Get<T>()
         {
-            return _container.GetA<T>();
+            return _container.Prepare(_container.GetA<T>());
         }
     }
 }

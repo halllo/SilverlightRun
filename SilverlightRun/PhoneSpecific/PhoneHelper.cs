@@ -6,7 +6,8 @@ using Microsoft.Phone.Controls;
 namespace SilverlightRun.PhoneSpecific
 {
     /// <summary>
-    /// Baisc phone functionality.
+    /// Basic phone functionality like thread dispatching and page naviagation.
+    /// Best staticly initialized in App.xaml.cs to be accessible everywhere.
     /// </summary>
     public class PhoneHelper
     {
