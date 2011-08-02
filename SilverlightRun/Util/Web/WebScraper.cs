@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 
-namespace SilverlightRun.Util.Scraper
+namespace SilverlightRun.Util.Web
 {
     /// <summary>
     /// Allows basic html parsing.
@@ -10,25 +10,6 @@ namespace SilverlightRun.Util.Scraper
     /// <typeparam name="T">Any type that can be returned by this parser.</typeparam>
     public abstract class WebScraper<T>
     {
-        protected string NormContent(string desc)
-        {
-            var exp = ContentScraper.From(desc)
-                .Replace("<.*?>", "")
-                .Replace("\r", "")
-                .Replace("\n", "")
-                .Replace("&quot;", "\"")
-                .Replace("&nbsp;", "")
-                .Until("<");
-            return exp.Result.Trim();
-        }
-
-        protected string NormWhiteSpaces(string desc)
-        {
-            string normedDesc = desc;
-            while (normedDesc.Contains("  ")) normedDesc = normedDesc.Replace("  ", " ");
-            return normedDesc;
-        }
-
         WebClient _webC;
         Action<IEnumerable<T>> _returner;
         IPhoneService _phone;

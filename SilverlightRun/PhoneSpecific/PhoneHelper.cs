@@ -2,6 +2,8 @@ using System;
 using System.Windows;
 using System.Windows.Media;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Net.NetworkInformation;
+using Microsoft.Phone.Shell;
 
 namespace SilverlightRun.PhoneSpecific
 {
@@ -25,6 +27,21 @@ namespace SilverlightRun.PhoneSpecific
         public void NavigateBack()
         {
             this._rootFrame().GoBack();
+        }
+
+        public ApplicationBarIconButton AppBarButton(PhoneApplicationPage page, int p)
+        {
+            return page.ApplicationBar.Buttons[p] as ApplicationBarIconButton;
+        }
+
+        public ApplicationBarMenuItem AppBarMenu(PhoneApplicationPage page, int p)
+        {
+            return page.ApplicationBar.MenuItems[p] as ApplicationBarMenuItem;
+        }
+
+        public bool HasInternet
+        {
+            get { return NetworkInterface.GetIsNetworkAvailable(); }
         }
 
         public void IfNotNull<T>(T obj, Action<T> doAction)

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SilverlightRun.Util.Scraper
+namespace SilverlightRun.Util.Web
 {
     /// <summary>
     /// Allows downloading of a simple web page.
@@ -13,7 +13,7 @@ namespace SilverlightRun.Util.Scraper
             _url = url;
         }
 
-        public static WebHtmlDownloader Url(string url)
+        public static WebHtmlDownloader ForUrl(string url)
         {
             return new WebHtmlDownloader(url);
         }

@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace SilverlightRun.Util.Scraper
+namespace SilverlightRun.Util
 {
     /// <summary>
     /// Basic content parsing.
     /// </summary>
     public class ContentScraper
     {
-        public static ContentScraper From(string expression)
+        public static ContentScraper For(string expression)
         {
             return new ContentScraper(expression);
         }
@@ -65,11 +65,20 @@ namespace SilverlightRun.Util.Scraper
             get { return this.Expression; }
         }
 
+        public ContentScraper Until(int index)
+        {
+            if (index < 0) index = this.Expression.Length;
+            return new ContentScraper(this.Expression.Substring(0, index));
+        }
+
         public ContentScraper Until(string p)
         {
-            int indexOfPattern = this.Expression.IndexOf(p);
-            if (indexOfPattern < 0) indexOfPattern = this.Expression.Length;
-            return new ContentScraper(this.Expression.Substring(0, indexOfPattern));
+            return Until(this.Expression.IndexOf(p));
+        }
+
+        public ContentScraper UntilLast(string p)
+        {
+            return Until(this.Expression.LastIndexOf(p));
         }
 
         public ContentScraper UntilEarliest(string p1, string p2)
@@ -84,12 +93,12 @@ namespace SilverlightRun.Util.Scraper
 
         public ContentScraper StartingAt(string p)
         {
-            return new ContentScraper(this.Expression.Substring(this.Expression.IndexOf(p)));
+            return StartingAt(this.Expression.IndexOf(p));
         }
 
         public ContentScraper StartingAtLast(string p)
         {
-            return new ContentScraper(this.Expression.Substring(this.Expression.LastIndexOf(p)));
+            return StartingAt(this.Expression.LastIndexOf(p));
         }
 
         public ContentScraper StartingAt(int p)
