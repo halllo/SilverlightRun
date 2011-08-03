@@ -8,37 +8,26 @@ namespace SilverlightRun.Util.Web
     /// <summary>
     /// Basic http GET and POST request and response helper.
     /// </summary>
-    public static class HttpHelper
+    public static class WebHelper
     {
-        public static void Navigate(this string url, CookieContainer cookieJar, Action<string> result)
+        public static UrlHelper Url(this string url)
         {
-            HttpWebRequest request = HttpHelper.Request(url, cookieJar);
-            request.GetResponseContent(result);
-        }
-
-        public static HttpWebRequest Request(this string url, CookieContainer cookieJar)
-        {
-            var request = (HttpWebRequest)HttpWebRequest.Create(url);
-            request.CookieContainer = cookieJar;
-            return request;
-        }
-
-        public static HttpWebRequest FormSubmit(this string url, CookieContainer cookieJar)
-        {
-            var request = Request(url, cookieJar);
-            request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
-            return request;
+            return new UrlHelper(url);
         }
 
         public static void GetResponseContent(this HttpWebRequest request, string requestContent, Action<string> result)
         {
             byte[] rawContent = requestContent.ToAscii();
+            request.GetResponseContent(rawContent, result);
+        }
+
+        public static void GetResponseContent(this HttpWebRequest request, byte[] requestContent, Action<string> result)
+        {
             request.BeginGetRequestStream((iar) =>
             {
                 using (Stream requestStrm = request.EndGetRequestStream(iar))
                 {
-                    requestStrm.Write(rawContent, 0, rawContent.Length);
+                    requestStrm.Write(requestContent, 0, requestContent.Length);
                 }
                 GetResponseContent(request, result);
             }, request);
@@ -68,9 +57,9 @@ namespace SilverlightRun.Util.Web
             return retval;
         }
 
-        public static string OnlyValue(this Match htmlelement)
+        public static string OnlyValue(this string element)
         {
-            Match match = Regex.Match(htmlelement.Value, "<.*?>((.|\n)*?)<.*?>");
+            Match match = Regex.Match(element, "<.*?>((.|\n)*?)<.*?>");
             return match.Groups[1].Value.Trim();
         }
 

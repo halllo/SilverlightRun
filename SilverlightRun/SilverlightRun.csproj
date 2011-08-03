@@ -75,8 +75,7 @@
     <Compile Include="PhoneSpecific\UI\Screenshot.cs" />
     <Compile Include="PhoneSpecific\UI\Zoom\ZoomContainer.cs" />
     <Compile Include="PhoneSpecific\UI\Zoom\ZoomContainerContent.cs" />
-    <Compile Include="Util\Web\HttpHelper.cs" />
-    <Compile Include="Util\Web\WebHtmlDownloader.cs" />
+    <Compile Include="Util\Web\UrlHelper.cs" />
     <Compile Include="Util\ContentScraper.cs" />
     <Compile Include="Util\EnumHelper.cs" />
     <Compile Include="IPhoneService.cs" />
@@ -88,9 +87,9 @@
     <Compile Include="Tombstoning\TombstoneSurvivalEngine.cs" />
     <Compile Include="Tombstoning\TombstoneSurvivalISStorage.cs" />
     <Compile Include="Tombstoning\TombstoneSurvivalStateStorage.cs" />
+    <Compile Include="Util\Web\WebHelper.cs" />
     <Compile Include="Util\Web\WebString.cs" />
     <Compile Include="Util\Tuple2.cs" />
-    <Compile Include="Util\Web\WebScraper.cs" />
     <Compile Include="ViewModel\ColdBindingConverter.cs" />
     <Compile Include="ViewModel\ColdCommand.cs" />
     <Compile Include="ViewModel\ColdViewModel.cs" />
@@ -101,9 +100,7 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Util\Scraper\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions />
