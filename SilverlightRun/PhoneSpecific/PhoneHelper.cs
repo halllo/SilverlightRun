@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
 using Microsoft.Phone.Controls;
@@ -63,9 +64,11 @@ namespace SilverlightRun.PhoneSpecific
             this._rootFrame().Dispatcher.BeginInvoke(() => toDispatch());
         }
 
+        public bool InDesignMode { get { return DesignerProperties.IsInDesignTool; } }
+
         public SolidColorBrush AccentBrush
         {
-            get { return (SolidColorBrush)Application.Current.Resources["PhoneAccentBrush"];}
+            get { return (SolidColorBrush)Application.Current.Resources["PhoneAccentBrush"]; }
         }
     }
 }

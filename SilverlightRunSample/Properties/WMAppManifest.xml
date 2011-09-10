@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.0">
-  <App xmlns="" ProductID="{aa21a231-2859-4590-8e55-3b2f0ed84868}" Title="SilverlightRunSample" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="SilverlightRunSample author" Description="Sample description" Publisher="SilverlightRunSample">
+  <App xmlns="" ProductID="{aa21a231-2859-4590-8e55-3b2f0ed84868}" Title="SilverlightRun Sample" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Manuel Naujoks" Description="Sample use of the SilverlightRun toolkit" Publisher="Manuel Naujoks">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
+      <Capability Name="ID_CAP_NETWORKING" />
     </Capabilities>
     <Tasks>
-      <DefaultTask  Name ="_default" NavigationPage="MainPage.xaml"/>
+      <DefaultTask Name="_default" NavigationPage="MainPage.xaml" />
     </Tasks>
     <Tokens>
       <PrimaryToken TokenID="SilverlightRunSampleToken" TaskName="_default">
         <TemplateType5>
           <BackgroundImageURI IsRelative="true" IsResource="false">Background.png</BackgroundImageURI>
           <Count>0</Count>
-          <Title>SilverlightRunSample</Title>
+          <Title>SilverlightRun</Title>
         </TemplateType5>
       </PrimaryToken>
     </Tokens>

@@ -46,6 +46,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Phone" />
+    <Reference Include="Microsoft.Phone.Controls, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">
       <HintPath>..\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
@@ -62,19 +63,30 @@
     <Compile Include="PhoneSpecific\PhoneTypeCenter.cs" />
     <Compile Include="PhoneSpecific\Storage\IsolatedFiles.cs" />
     <Compile Include="PhoneSpecific\Storage\IsolatedValues.cs" />
+    <Compile Include="PhoneSpecific\UI\Animation\ColdAnimation.cs" />
+    <Compile Include="PhoneSpecific\UI\Animation\ColdAnimationRegistered.cs" />
+    <Compile Include="PhoneSpecific\UI\Animation\ColdAnimationTargeted.cs" />
+    <Compile Include="PhoneSpecific\UI\Animation\ColdFlipAnimation.cs" />
     <Compile Include="PhoneSpecific\UI\BoolToVisibilityConverter.cs" />
-    <Compile Include="PhoneSpecific\UI\DynamicGrid\DynamicGridItem.cs" />
-    <Compile Include="PhoneSpecific\UI\DynamicGrid\SelfSizedGrid.cs" />
-    <Compile Include="PhoneSpecific\UI\DynamicGrid\ToDynamicGridItemConverter.cs" />
+    <Compile Include="PhoneSpecific\UI\Controls\ColdDescriptionButton.cs" />
+    <Compile Include="PhoneSpecific\UI\Controls\ColdGridItem.cs" />
+    <Compile Include="PhoneSpecific\UI\Controls\ColdGrid.cs" />
     <Compile Include="PhoneSpecific\PhoneHelper.cs" />
     <Compile Include="DI\GenericSimpleContainer.cs" />
     <Compile Include="DI\SimpleContainer.cs" />
     <Compile Include="PhoneSpecific\UI\BitmapHelper.cs" />
     <Compile Include="PhoneSpecific\PhoneServiceAdapter.cs" />
+    <Compile Include="PhoneSpecific\UI\Controls\ColdFlipContainer.cs" />
+    <Compile Include="PhoneSpecific\UI\Controls\ColdMoreAppsButton.cs" />
+    <Compile Include="PhoneSpecific\UI\Controls\ColdPivot.cs" />
+    <Compile Include="PhoneSpecific\UI\Controls\ColdPurchaseButton.cs" />
+    <Compile Include="PhoneSpecific\UI\Controls\ColdWebLink.cs" />
     <Compile Include="PhoneSpecific\UI\License.cs" />
+    <Compile Include="PhoneSpecific\UI\Controls\ColdListBox.cs" />
     <Compile Include="PhoneSpecific\UI\Screenshot.cs" />
-    <Compile Include="PhoneSpecific\UI\Zoom\ZoomContainer.cs" />
-    <Compile Include="PhoneSpecific\UI\Zoom\ZoomContainerContent.cs" />
+    <Compile Include="PhoneSpecific\UI\Controls\ZoomChangedEventArgs.cs" />
+    <Compile Include="PhoneSpecific\UI\Controls\ColdZoomContainer.cs" />
+    <Compile Include="PhoneSpecific\UI\Controls\ColdZoomContent.cs" />
     <Compile Include="Util\Web\UrlHelper.cs" />
     <Compile Include="Util\ContentScraper.cs" />
     <Compile Include="Util\EnumHelper.cs" />

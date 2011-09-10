@@ -4,12 +4,12 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace SilverlightRun.PhoneSpecific.UI.DynamicGrid
+namespace SilverlightRun.PhoneSpecific.UI
 {
     /// <summary>
-    /// 
+    /// This grid adjusts is row heights/column widths as new items are added to it by observering their DependencyProperties.
     /// </summary>
-    public class SelfSizedGrid : ItemsControl
+    public class ColdGrid : ItemsControl
     {
         private Grid _theGrid;
         private List<FrameworkElement> _desiredItems;
@@ -21,12 +21,12 @@ namespace SilverlightRun.PhoneSpecific.UI.DynamicGrid
         }
 
         public static readonly DependencyProperty DynamicItemsSourceProperty =
-            DependencyProperty.Register("DynamicItemsSource", typeof(IEnumerable), typeof(SelfSizedGrid), new PropertyMetadata(DynItemsSourceChanged));
+            DependencyProperty.Register("DynamicItemsSource", typeof(IEnumerable), typeof(ColdGrid), new PropertyMetadata(DynItemsSourceChanged));
 
         private static void DynItemsSourceChanged(DependencyObject dob, DependencyPropertyChangedEventArgs e)
         {
-            var ssgrid = dob as SelfSizedGrid;
-            var dgiCollection = e.NewValue as ObservableCollection<DynamicGridItem>;
+            var ssgrid = dob as ColdGrid;
+            var dgiCollection = e.NewValue as ObservableCollection<ColdGridItem>;
             if (dgiCollection != null)
             {
                 foreach (var item in dgiCollection) ssgrid.AddDynamicItemToGrid(item);
@@ -34,24 +34,25 @@ namespace SilverlightRun.PhoneSpecific.UI.DynamicGrid
             }
         }
 
-        private static void CoolCollectionChanged(SelfSizedGrid grid, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private static void CoolCollectionChanged(ColdGrid grid, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
             {
-                foreach (var item in e.NewItems) grid.AddDynamicItemToGrid(item as DynamicGridItem);
+                foreach (var item in e.NewItems) grid.AddDynamicItemToGrid(item as ColdGridItem);
             }
         }
 
-        public SelfSizedGrid()
+        public ColdGrid()
         {
-            DefaultStyleKey = typeof(SelfSizedGrid);
+            DefaultStyleKey = typeof(ColdGrid);
             _desiredItems = new List<FrameworkElement>();
         }
 
         public override void OnApplyTemplate()
         {
+            if (System.ComponentModel.DesignerProperties.IsInDesignTool) return;
             base.OnApplyTemplate();
-            _theGrid = this.GetTemplateChild("theGrid") as Grid;
+            _theGrid = GetTemplateChild("theGrid") as Grid;
             _theGrid.Children.Clear();
             AddRememberedItems();
         }
@@ -82,13 +83,13 @@ namespace SilverlightRun.PhoneSpecific.UI.DynamicGrid
             _desiredItems.Clear();
         }
 
-        private void AddDynamicItemToGrid(DynamicGridItem item)
+        private void AddDynamicItemToGrid(ColdGridItem item)
         {
             var uiItem = new ContentPresenter() { Content = item.DataContext, ContentTemplate = this.ItemTemplate };
-            Grid.SetColumn(uiItem, item.GridColumn);
-            Grid.SetRow(uiItem, item.GridRow);
-            Grid.SetColumnSpan(uiItem, item.GridColumnSpan);
-            Grid.SetRowSpan(uiItem, item.GridRowSpan);
+            Grid.SetColumn(uiItem, Grid.GetColumn(item));
+            Grid.SetRow(uiItem, Grid.GetRow(item));
+            Grid.SetColumnSpan(uiItem, Grid.GetColumnSpan(item));
+            Grid.SetRowSpan(uiItem, Grid.GetRowSpan(item));
             this.Items.Add(uiItem);
         }
 

@@ -1,15 +1,26 @@
-﻿namespace SilverlightRunSample.VM
+﻿using System.Collections.ObjectModel;
+using System.Windows;
+using SilverlightRun.PhoneSpecific.UI;
+using SilverlightRun.Tombstoning;
+using SilverlightRun.ViewModel;
+
+namespace SilverlightRunSample.VM
 {
-    public class MainPage : SilverlightRun.ViewModel.ColdViewModel<MainPage>
+    public class MainPage : ColdViewModel<MainPage>
     {
-        [SilverlightRun.Tombstoning.SurvivesTombstoning]
+        [SurvivesTombstoning]
         public string Word1 { get; set; }
 
-        [SilverlightRun.Tombstoning.SurvivesRestart]
+        [SurvivesRestart]
         public string Word2 { get; set; }
+
+        public ObservableCollection<ColdGridItem> GridCells { get; set; }
+        public ObservableCollection<UIElement> ListCells { get; set; }
 
         public MainPage()
         {
+            GridCells = new ObservableCollection<ColdGridItem>();
+            ListCells = new ObservableCollection<UIElement>();
         }
     }
 }

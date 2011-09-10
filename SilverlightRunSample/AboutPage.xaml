@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:srui="clr-namespace:SilverlightRun.PhoneSpecific.UI;assembly=SilverlightRun"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -21,20 +22,22 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,10">
-            <TextBlock x:Name="ApplicationTitle" Text="SilverlightRun" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="ApplicationTitle" Text="SilverlightRun Sample" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="info" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="0,0,0,0">
             <ListBox>
+                <TextBlock Text="This app is just a demo application to show off a few features of the free SilverlightRun toolkit from Manuel Naujoks." TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}" />
                 <Image Source="Background.png" Stretch="Fill" Width="200" Margin="128,50,0,20"></Image>
-                <HyperlinkButton Margin="120,0,0,100" FontSize="30" Content="www.neokc.de" Click="HyperlinkButton_Click" />
+                <srui:ColdWebLink Margin="120,0,0,50" FontSize="30" Url="www.neokc.de" />
                 <TextBlock Text="This app was implemented by Manuel Naujoks." TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}" />
                 <StackPanel Orientation="Horizontal">
                     <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Style="{StaticResource PhoneTextSubtleStyle}" Text="© 2011" />
-                    <HyperlinkButton Content="mobile.twitter.com/halllo" VerticalAlignment="Center" Click="HyperlinkButton_Click" />
+                    <srui:ColdWebLink Url="mobile.twitter.com/halllo" VerticalAlignment="Center"/>
                 </StackPanel>
+                <srui:ColdMoreAppsButton Publisher="halllo" Margin="60,10,0,0"/>
             </ListBox>
         </Grid>
     </Grid>

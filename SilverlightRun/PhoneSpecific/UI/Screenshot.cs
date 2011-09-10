@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Media;
 namespace SilverlightRun.PhoneSpecific.UI
 {
     /// <summary>
-    /// Allows creation, storage and reload of screenshots of arbitrary UIElements
+    /// Allows creation, storage and reload of screenshots of arbitrary UIElements.
     /// </summary>
     public class Screenshot
     {

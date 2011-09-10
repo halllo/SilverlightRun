@@ -3,19 +3,25 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace SilverlightRun.PhoneSpecific.UI.Zoom
+namespace SilverlightRun.PhoneSpecific.UI
 {
     /// <summary>
     /// Automatically starts zoom at a level where everything is visible, regardless of control size.
     /// </summary>
-    public class ZoomContainerContent : ContentControl
+    public class ColdZoomContent : ContentControl
     {
         ContentPresenter _presenter;
-        ZoomContainer _zoomer;
+        ColdZoomContainer _zoomer;
 
-        public ZoomContainerContent()
+        public ColdZoomContent()
         {
-            DefaultStyleKey = typeof(ZoomContainerContent);
+            DefaultStyleKey = typeof(ColdZoomContent);
+            Loaded += new RoutedEventHandler(ZoomContainerContent_Loaded);
+        }
+
+        void ZoomContainerContent_Loaded(object sender, RoutedEventArgs e)
+        {
+            ZoomRight();
         }
 
         public override void OnApplyTemplate()
@@ -24,15 +30,18 @@ namespace SilverlightRun.PhoneSpecific.UI.Zoom
             _presenter = this.GetTemplateChild("ContentContainer") as ContentPresenter;
         }
 
-        internal void SetZoomContainer(ZoomContainer zoomer)
+        internal void SetZoomContainer(ColdZoomContainer zoomer)
         {
-            _zoomer = zoomer;            
+            _zoomer = zoomer;
         }
 
         public void ZoomRight()
         {
-            var uie = _presenter.Content as FrameworkElement;
-            if (uie != null) uie.RenderTransform = CreateDefaultScaleTransform(uie);
+            if (_presenter != null)
+            {
+                var uie = _presenter.Content as FrameworkElement;
+                if (uie != null) uie.RenderTransform = CreateDefaultScaleTransform(uie);
+            }
         }
 
         private CompositeTransform CreateDefaultScaleTransform(FrameworkElement uie)

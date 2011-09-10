@@ -1,22 +1,13 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using Microsoft.Phone.Controls;
+﻿using Microsoft.Phone.Controls;
 using Microsoft.Phone.Marketplace;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 
 namespace SilverlightRun.PhoneSpecific.UI
 {
-    public class PurchaseButton : Button
-    {
-        public PurchaseButton()
-            : base()
-        {
-            this.Content = "Purchase";
-            this.Visibility = License.IsTrial ? Visibility.Visible : Visibility.Collapsed;
-            this.Click += (s, e) => License.Purchase();
-        }
-    }
+    /// <summary>
+    /// Provides helper functions to support trial mode.
+    /// </summary>
     public class License
     {
         public static bool IsTrial

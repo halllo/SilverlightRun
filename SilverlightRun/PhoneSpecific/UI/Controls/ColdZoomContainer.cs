@@ -4,29 +4,31 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using Microsoft.Phone.Controls;
 
-namespace SilverlightRun.PhoneSpecific.UI.Zoom
+namespace SilverlightRun.PhoneSpecific.UI
 {
     /// <summary>
     /// Allows the content of this ContentControl to be zoomable and panable.
     /// Max zoom level is MAX_THING_ZOOM.
     /// </summary>
-    public class ZoomContainer : ContentControl
+    public class ColdZoomContainer : ContentControl
     {
         ContentPresenter _presenter;
 
         public FrameworkElement ZoomableContent { get { return _presenter; } }
         public bool CacheManipulations { set { if (value) SetCache(); else RemoveCache(); } }
+        public event EventHandler<ZoomChangedEventArgs> ZoomChanged;
 
         public string InfoText
         {
             get { return (string)GetValue(InfoTextProperty); }
             set { SetValue(InfoTextProperty, value); }
         }
-        public static readonly DependencyProperty InfoTextProperty = DependencyProperty.Register("InfoText", typeof(string), typeof(ZoomContainer), null);
+        public static readonly DependencyProperty InfoTextProperty = DependencyProperty.Register("InfoText", typeof(string), typeof(ColdZoomContainer), null);
 
-        public ZoomContainer()
+        public ColdZoomContainer()
         {
-            DefaultStyleKey = typeof(ZoomContainer);
+            DefaultStyleKey = typeof(ColdZoomContainer);
+            ZoomChanged += (s, z) => { };
         }
 
         public override void OnApplyTemplate()
@@ -39,12 +41,16 @@ namespace SilverlightRun.PhoneSpecific.UI.Zoom
 
         private void SetupZoomRight()
         {
-            var zoomContainerContent = _presenter.GetValue(ContentPresenter.ContentProperty) as ZoomContainerContent;
-            if (zoomContainerContent != null) zoomContainerContent.SetZoomContainer(this);
+            if (_presenter != null)
+            {
+                var zoomContainerContent = _presenter.GetValue(ContentPresenter.ContentProperty) as ColdZoomContent;
+                if (zoomContainerContent != null) zoomContainerContent.SetZoomContainer(this);
+            }
         }
 
         private void SetupGestureListener(DependencyObject dpo)
         {
+            if (System.ComponentModel.DesignerProperties.IsInDesignTool) return;
             GestureListener gestures = GestureService.GetGestureListener(dpo);
             gestures.DoubleTap += new EventHandler<GestureEventArgs>(gestures_DoubleTap);
             gestures.PinchStarted += new EventHandler<PinchStartedGestureEventArgs>(gestures_PinchStarted);
@@ -149,6 +155,7 @@ namespace SilverlightRun.PhoneSpecific.UI.Zoom
 
         private void ApplyScale()
         {
+            ZoomChanged(this, new ZoomChangedEventArgs { ZoomFactor = TotalThingScale });
             ((CompositeTransform)theThingToZoom.RenderTransform).ScaleX = TotalThingScale;
             ((CompositeTransform)theThingToZoom.RenderTransform).ScaleY = TotalThingScale;
         }

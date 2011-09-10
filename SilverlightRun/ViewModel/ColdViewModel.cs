@@ -12,7 +12,6 @@ namespace SilverlightRun.ViewModel
     public abstract class ColdViewModel<T> : INotifyPropertyChanged
     {
         TombstoneSurvivalEngine tombstoning;
-
         IPhoneService _Phone;
         public IPhoneService Phone
         {
@@ -26,7 +25,8 @@ namespace SilverlightRun.ViewModel
                 tombstoning = TombstoneSurvivalEngine.SetupFor<T>(this, _Phone);
             }
         }
-
+        public event PropertyChangedEventHandler PropertyChanged;
+        
         public ColdViewModel()
         {
             PropertyChanged += (s, e) => { };
@@ -34,17 +34,44 @@ namespace SilverlightRun.ViewModel
 
         public void Changed<R>(Expression<Func<R>> property)
         {
-            string propertyName = GetNameForLocator(property);
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            Changed(GetNameForLocator(property));
         }
 
-        private static string GetNameForLocator<R>(Expression<Func<R>> locator)
+        public void Changed<R>(Expression<Func<T, R>> property)
         {
-            LambdaExpression lambdaExp = (LambdaExpression)locator;
-            MemberExpression memExp = (MemberExpression)lambdaExp.Body;
-            return memExp.Member.Name;
+            Changed(GetNameForLocator(property));
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public void Change<R>(Expression<Func<R>> property, R to)
+        {
+            Changed(GetNameForLocatorAndSet<R>(this, property, to));
+        }
+
+        public void Change<R>(Expression<Func<T, R>> property, R to)
+        {
+            Changed(GetNameForLocatorAndSet<R>(this, property, to));
+        }
+
+        public void Changed(string prop)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
+        private static string GetNameForLocatorAndSet<R>(object inst, LambdaExpression property, R content)
+        {
+            string propertyName = GetNameForLocator(property);
+            SetValueForProperty(inst, propertyName, content);
+            return propertyName;
+        }
+
+        private static string GetNameForLocator(LambdaExpression locator)
+        {
+            return ((MemberExpression)locator.Body).Member.Name;
+        }
+
+        private static void SetValueForProperty(object source, string property, object content)
+        {
+            source.GetType().GetProperty(property).SetValue(source, content, null);
+        }
     }
 }
