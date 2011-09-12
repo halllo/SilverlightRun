@@ -17,6 +17,7 @@ namespace SilverlightRunSample
 
         void MainPage_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
+            pivotContainer.RememberActivePivot(App.ViewModelCenter.Get<SilverlightRun.IPhoneService>());
             tb_Info1.Foreground = App.Helper.AccentBrush;
             tb_Info2.Foreground = App.Helper.AccentBrush;
             ViewHelper.SetupInternetIndicator(internetIndicator);

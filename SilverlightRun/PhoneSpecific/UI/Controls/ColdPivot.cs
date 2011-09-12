@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Phone.Controls;
+using SilverlightRun.Tombstoning;
 
 namespace SilverlightRun.PhoneSpecific.UI
 {
@@ -12,10 +13,23 @@ namespace SilverlightRun.PhoneSpecific.UI
         List<PivotItem> _preItems;
         List<PivotItem> _postItems;
 
+        [SurvivesTombstoning]
+        public int RememberedSelectedIndex
+        {
+            get { return SelectedIndex; }
+            set { SelectedIndex = value; }
+        }
+
         public ColdPivot()
+            : base()
         {
             _preItems = new List<PivotItem>();
             _postItems = new List<PivotItem>();
+        }
+
+        public void RememberActivePivot(IPhoneService phone)
+        {
+            TombstoneSurvivalEngine.SetupFor<ColdPivot>(this, phone);
         }
 
         public void FocusOn(int index, bool when)

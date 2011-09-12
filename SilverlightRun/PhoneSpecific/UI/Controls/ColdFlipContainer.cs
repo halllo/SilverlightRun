@@ -14,6 +14,7 @@ namespace SilverlightRun.PhoneSpecific.UI
         Grid _container;
         Border _frontBorder;
         Border _backBorder;
+        ColdFlipAnimation _flipAnimation;
 
         public UIElement Front
         {
@@ -38,6 +39,7 @@ namespace SilverlightRun.PhoneSpecific.UI
         public ColdFlipContainer()
         {
             DefaultStyleKey = typeof(ColdFlipContainer);
+            _flipAnimation = ColdFlipAnimation.WithDuration(300);
         }
 
         public override void OnApplyTemplate()
@@ -52,32 +54,46 @@ namespace SilverlightRun.PhoneSpecific.UI
 
         public void FlipLeft()
         {
-            ColdFlipAnimation.AdjustHorizontalOrientationOfContent(_container, _frontContentPrensenter, _backContentPrensenter);
-            ColdFlipAnimation.FlipLeft(_container, _frontBorder, _backBorder);
+            if (_flipAnimation.IsFlipping()) return;
+            _flipAnimation.AdjustHorizontalOrientationOfContent(_container, _frontContentPrensenter, _backContentPrensenter);
+            _flipAnimation.FlipLeft(_container, _frontBorder, _backBorder);
         }
 
         public void FlipRight()
         {
-            ColdFlipAnimation.AdjustHorizontalOrientationOfContent(_container, _frontContentPrensenter, _backContentPrensenter);
-            ColdFlipAnimation.FlipRight(_container, _frontBorder, _backBorder);
+            if (_flipAnimation.IsFlipping()) return;
+            _flipAnimation.AdjustHorizontalOrientationOfContent(_container, _frontContentPrensenter, _backContentPrensenter);
+            _flipAnimation.FlipRight(_container, _frontBorder, _backBorder);
         }
 
         public void FlipDown()
         {
-            ColdFlipAnimation.AdjustVerticalOrientationOfContent(_container, _frontContentPrensenter, _backContentPrensenter);
-            if (ColdFlipAnimation.FlippedHorizontally(_container))
-                ColdFlipAnimation.FlipUp(_container, _frontBorder, _backBorder);
+            if (_flipAnimation.IsFlipping()) return;
+            _flipAnimation.AdjustVerticalOrientationOfContent(_container, _frontContentPrensenter, _backContentPrensenter);
+            if (_flipAnimation.FlippedHorizontally(_container))
+                _flipAnimation.FlipUp(_container, _frontBorder, _backBorder);
             else
-                ColdFlipAnimation.FlipDown(_container, _frontBorder, _backBorder);
+                _flipAnimation.FlipDown(_container, _frontBorder, _backBorder);
         }
 
         public void FlipUp()
         {
-            ColdFlipAnimation.AdjustVerticalOrientationOfContent(_container, _frontContentPrensenter, _backContentPrensenter);
-            if (ColdFlipAnimation.FlippedHorizontally(_container))
-                ColdFlipAnimation.FlipDown(_container, _frontBorder, _backBorder);
+            if (_flipAnimation.IsFlipping()) return;
+            _flipAnimation.AdjustVerticalOrientationOfContent(_container, _frontContentPrensenter, _backContentPrensenter);
+            if (_flipAnimation.FlippedHorizontally(_container))
+                _flipAnimation.FlipDown(_container, _frontBorder, _backBorder);
             else
-                ColdFlipAnimation.FlipUp(_container, _frontBorder, _backBorder);
+                _flipAnimation.FlipUp(_container, _frontBorder, _backBorder);
+        }
+
+        public void ShowFront()
+        {
+            _flipAnimation.Reset();
+        }
+
+        public bool ShowsFront
+        {
+            get { return _frontBorder.Visibility == System.Windows.Visibility.Visible; }
         }
     }
 }

@@ -27,11 +27,11 @@ namespace SilverlightRun.PhoneSpecific.UI.Animation
 
         public void Animate(params ColdAnimationTargeted[] targets)
         {
-            ResetOldStoryboard();
+            Reset();
             BuildAndStartNewStoryboard(targets);
         }
 
-        private void ResetOldStoryboard()
+        public void Reset()
         {
             if (_allAnimations != null)
             {
