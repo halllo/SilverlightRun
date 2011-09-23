@@ -62,7 +62,12 @@ namespace SilverlightRun.Util
         #region Resulting
         public string Result
         {
-            get { return this.Expression; }
+            get { return this.Expression.Trim(); }
+        }
+
+        public int ResultAsInt
+        {
+            get { return Int32.Parse(this.Expression.Trim()); }
         }
 
         public ContentScraper Until(int index)
@@ -74,6 +79,11 @@ namespace SilverlightRun.Util
         public ContentScraper Until(string p)
         {
             return Until(this.Expression.IndexOf(p));
+        }
+
+        public ContentScraper UntilSecond(string p)
+        {
+            return Until(this.Expression.IndexOf(p, this.Expression.IndexOf(p) + p.Length));
         }
 
         public ContentScraper UntilLast(string p)
@@ -109,6 +119,11 @@ namespace SilverlightRun.Util
         public ContentScraper StartingAfter(string p)
         {
             return this.StartingAt(p).StartingAt(p.Length);
+        }
+
+        public ContentScraper StartingAfterLast(string p)
+        {
+            return this.StartingAtLast(p).StartingAt(p.Length);
         }
 
         public ContentScraper ShortenTo(int p)

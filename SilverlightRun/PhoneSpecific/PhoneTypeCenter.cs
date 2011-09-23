@@ -3,7 +3,7 @@
 namespace SilverlightRun.PhoneSpecific
 {
     /// <summary>
-    /// Provides a basic type locator functionality with default IPhoneService initialized.
+    /// Provides a basic type locator functionality with default IPhoneService and IFileSystem initialized.
     /// Best staticly initialized in App.xaml.cs to be accessible everywhere.
     /// </summary>
     public abstract class PhoneTypeCenter
@@ -13,6 +13,7 @@ namespace SilverlightRun.PhoneSpecific
         public PhoneTypeCenter()
         {
             _container = new GenericSimpleContainer();
+            _container.DeclareSingleton<Storage.IFileSystem, Storage.IsolatedStorageFS>();
             _container.DeclareSingleton<IPhoneService, PhoneServiceAdapter>();
             ContainerSetup(_container);
         }

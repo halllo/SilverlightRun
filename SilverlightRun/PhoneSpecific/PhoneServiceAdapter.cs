@@ -23,7 +23,10 @@ namespace SilverlightRun.PhoneSpecific
 
         public void Store(string key, object value)
         {
-            PhoneApplicationService.Current.State.Add(key, value);
+            if (!HasStored(key))
+                PhoneApplicationService.Current.State.Add(key, value);
+            else
+                PhoneApplicationService.Current.State[key] = value;
         }
 
         public bool HasStored(string key)

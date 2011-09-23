@@ -23,10 +23,11 @@ namespace SilverlightRun.ViewModel
             {
                 _Phone = value;
                 tombstoning = TombstoneSurvivalEngine.SetupFor<T>(this, _Phone);
+                OnPhoneServiceReady(_Phone);
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
         public ColdViewModel()
         {
             PropertyChanged += (s, e) => { };
@@ -72,6 +73,10 @@ namespace SilverlightRun.ViewModel
         private static void SetValueForProperty(object source, string property, object content)
         {
             source.GetType().GetProperty(property).SetValue(source, content, null);
+        }
+
+        protected virtual void OnPhoneServiceReady(IPhoneService phone)
+        {
         }
     }
 }

@@ -68,7 +68,27 @@ namespace SilverlightRun.PhoneSpecific
 
         public SolidColorBrush AccentBrush
         {
-            get { return (SolidColorBrush)Application.Current.Resources["PhoneAccentBrush"]; }
+            get { return Resource("PhoneAccentBrush") as SolidColorBrush; }
+        }
+
+        public SolidColorBrush ForegroundBrush
+        {
+            get { return Resource("PhoneForegroundBrush") as SolidColorBrush; }
+        }
+
+        public SolidColorBrush BackgroundBrush
+        {
+            get { return Resource("PhoneBackgroundBrush") as SolidColorBrush; }
+        }
+
+        public object Resource(string resource)
+        {
+            return Application.Current.Resources[resource];
+        }
+
+        public T Tag<T>(object sender) where T : class
+        {
+            return (sender as FrameworkElement).Tag as T;
         }
     }
 }

@@ -14,19 +14,19 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ui:ColdFlipContainer">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                    <Border>
                         <Grid x:Name="container" Background="{TemplateBinding Background}">
                             <Grid.Projection>
                                 <PlaneProjection/>
                             </Grid.Projection>
-                            <Border x:Name="front" BorderBrush="Black" BorderThickness="1" Margin="0">
+                            <Border x:Name="front" Margin="0" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                                 <ContentPresenter x:Name="FrontContent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                     <ContentPresenter.Projection>
                                         <PlaneProjection/>
                                     </ContentPresenter.Projection>
                                 </ContentPresenter>
                             </Border>
-                            <Border x:Name="back" BorderBrush="Black" BorderThickness="1" Margin="0" Visibility="Collapsed">
+                            <Border x:Name="back" Margin="0" Visibility="Collapsed" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                                 <ContentPresenter x:Name="BackContent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                     <ContentPresenter.Projection>
                                         <PlaneProjection/>
