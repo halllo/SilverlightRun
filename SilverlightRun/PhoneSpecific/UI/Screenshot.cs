@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Microsoft.Xna.Framework.Media;
 
 namespace SilverlightRun.PhoneSpecific.UI
 {
@@ -47,12 +46,6 @@ namespace SilverlightRun.PhoneSpecific.UI
             else
                 IsolatedStorageSettings.ApplicationSettings[imgKey] = BitmapHelper.Of(_wbitmap);
             IsolatedStorageSettings.ApplicationSettings.Save();
-        }
-
-        public void SaveInPictureHub(string imgName)
-        {
-            var media = new MediaLibrary();
-            media.SavePicture(imgName, BitmapHelper.BytesOf(_wbitmap));
         }
     }
 }

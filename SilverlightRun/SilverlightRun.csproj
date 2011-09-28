@@ -51,7 +51,6 @@
       <HintPath>..\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone.Interop" />
-    <Reference Include="Microsoft.Xna.Framework" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
@@ -61,13 +60,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PhoneSpecific\PhoneTypeCenter.cs" />
+    <Compile Include="PhoneSpecific\Storage\IFileSystem.cs" />
     <Compile Include="PhoneSpecific\Storage\IsolatedFiles.cs" />
+    <Compile Include="PhoneSpecific\Storage\IsolatedStorageFS.cs" />
     <Compile Include="PhoneSpecific\Storage\IsolatedValues.cs" />
     <Compile Include="PhoneSpecific\UI\Animation\ColdAnimation.cs" />
     <Compile Include="PhoneSpecific\UI\Animation\ColdAnimationRegistered.cs" />
     <Compile Include="PhoneSpecific\UI\Animation\ColdAnimationTargeted.cs" />
     <Compile Include="PhoneSpecific\UI\Animation\ColdFlipAnimation.cs" />
     <Compile Include="PhoneSpecific\UI\BoolToVisibilityConverter.cs" />
+    <Compile Include="PhoneSpecific\UI\ClickSensor.cs" />
     <Compile Include="PhoneSpecific\UI\Controls\ColdDescriptionButton.cs" />
     <Compile Include="PhoneSpecific\UI\Controls\ColdGridItem.cs" />
     <Compile Include="PhoneSpecific\UI\Controls\ColdGrid.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="PhoneSpecific\PhoneServiceAdapter.cs" />
     <Compile Include="PhoneSpecific\UI\Controls\ColdFlipContainer.cs" />
     <Compile Include="PhoneSpecific\UI\Controls\ColdMoreAppsButton.cs" />
+    <Compile Include="PhoneSpecific\UI\Controls\ColdPanorama.cs" />
     <Compile Include="PhoneSpecific\UI\Controls\ColdPivot.cs" />
     <Compile Include="PhoneSpecific\UI\Controls\ColdPurchaseButton.cs" />
     <Compile Include="PhoneSpecific\UI\Controls\ColdWebLink.cs" />
@@ -87,6 +90,7 @@
     <Compile Include="PhoneSpecific\UI\Controls\ZoomChangedEventArgs.cs" />
     <Compile Include="PhoneSpecific\UI\Controls\ColdZoomContainer.cs" />
     <Compile Include="PhoneSpecific\UI\Controls\ColdZoomContent.cs" />
+    <Compile Include="Util\EnumerableExtensions.cs" />
     <Compile Include="Util\Web\UrlHelper.cs" />
     <Compile Include="Util\ContentScraper.cs" />
     <Compile Include="Util\EnumHelper.cs" />

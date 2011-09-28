@@ -53,9 +53,19 @@ namespace SilverlightRun.ViewModel
             Changed(GetNameForLocatorAndSet<R>(this, property, to));
         }
 
-        public void Changed(string prop)
+        public void Changed(string property)
         {
-            PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
+
+        public void WhenChanged<R>(Expression<Func<T, R>> property, Action action)
+        {
+            WhenChanged(GetNameForLocator(property), action);
+        }
+
+        public void WhenChanged(string property, Action action)
+        {
+            PropertyChanged += (s, e) => { if (e.PropertyName == property) action(); };
         }
 
         private static string GetNameForLocatorAndSet<R>(object inst, LambdaExpression property, R content)

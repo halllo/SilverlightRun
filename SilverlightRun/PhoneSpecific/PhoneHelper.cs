@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Media;
 using Microsoft.Phone.Controls;
@@ -89,6 +90,25 @@ namespace SilverlightRun.PhoneSpecific
         public T Tag<T>(object sender) where T : class
         {
             return (sender as FrameworkElement).Tag as T;
+        }
+
+        public T DataContext<T>(object sender) where T : class
+        {
+            return (sender as FrameworkElement).DataContext as T;
+        }
+
+        public string ResourceFile(string path)
+        {
+            var resourceStream = ResourceFileStream(path);
+            using (var contentStream = new StreamReader(resourceStream)) return contentStream.ReadToEnd();
+        }
+
+        public Stream ResourceFileStream(string path)
+        {
+            var appName = Application.Current.ToString().Replace(".App", "");
+            var fullPath = string.Format("/{0};component/{1}", appName, path);
+            var resourceStream = Application.GetResourceStream(new Uri(fullPath, UriKind.Relative));
+            return resourceStream.Stream;
         }
     }
 }

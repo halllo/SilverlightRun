@@ -1,4 +1,5 @@
-﻿
+﻿using System.Windows.Media.Imaging;
+
 namespace SilverlightRun.PhoneSpecific.Storage
 {
     /// <summary>
@@ -19,5 +20,7 @@ namespace SilverlightRun.PhoneSpecific.Storage
         bool ContainsFile(string folder, string file);
         void CopyFolder(string folder, string newName);
         void CopyFile(string folder, string file, string newFolder, string newName);
+        void SaveImage(string folder, string file, BitmapImage image);
+        BitmapImage LoadImage(string folder, string file);
     }
 }

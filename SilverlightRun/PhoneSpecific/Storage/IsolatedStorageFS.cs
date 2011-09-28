@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
+using System.Windows.Media.Imaging;
 
 namespace SilverlightRun.PhoneSpecific.Storage
 {
@@ -96,6 +97,25 @@ namespace SilverlightRun.PhoneSpecific.Storage
         {
             string content = File(folder, file);
             NewFile(newFolder, newName, content);
+        }
+
+        public void SaveImage(string folder, string file, BitmapImage image)
+        {
+            using (var fileStream = _is.OpenFile(FileName(folder, file), FileMode.Create))
+            {
+                var wImg = new WriteableBitmap(image);
+                wImg.SaveJpeg(fileStream, wImg.PixelWidth, wImg.PixelHeight, 0, 85);
+            }
+        }
+
+        public BitmapImage LoadImage(string folder, string file)
+        {
+            using (var fileStream = _is.OpenFile(FileName(folder, file), FileMode.Open))
+            {
+                var bImg = new BitmapImage();
+                bImg.SetSource(fileStream);
+                return bImg;
+            }
         }
     }
 }
